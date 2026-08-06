@@ -27,7 +27,7 @@ test.describe('Clase 03 - Locators en DemoBlaze', () => {
         ).toBeVisible();
 
         await page.screenshot({
-            path: './evidencias/clase03-01-locator-texto-menu.png',
+            path: './evidencias/clase03/clase03-01-locator-texto-menu.png',
             fullPage: true
         });
     });
@@ -48,7 +48,7 @@ test.describe('Clase 03 - Locators en DemoBlaze', () => {
         expect(nombreProducto).not.toBeNull();
 
         await page.screenshot({
-            path: './evidencias/clase03-02-locator-css-productos.png',
+            path: './evidencias/clase03/clase03-02-locator-css-productos.png',
             fullPage: true
         });
     });
@@ -71,7 +71,7 @@ test.describe('Clase 03 - Locators en DemoBlaze', () => {
         await expect(page.locator('#loginpassword')).toBeVisible();
 
         await page.screenshot({
-            path: './evidencias/clase03-03-locator-id-login.png',
+            path: './evidencias/clase03/clase03-03-locator-id-login.png',
             fullPage: true
         });
      });
@@ -97,7 +97,7 @@ test.describe('Clase 03 - Locators en DemoBlaze', () => {
         expect(srcImagen).not.toBeNull();
 
         await page.screenshot({
-            path: './evidencias/clase03-04-locator-atributo-imagen.png',
+            path: './evidencias/clase03/clase03-04-locator-atributo-imagen.png',
             fullPage: true
         });
     });
@@ -112,7 +112,7 @@ test.describe('Clase 03 - Locators en DemoBlaze', () => {
     await expect(precio).toBeVisible();
 
     await page.screenshot({
-        path: './evidencias/clase03-05-locators-encadenados-precio.png',
+        path: './evidencias/clase03/clase03-05-locators-encadenados-precio.png',
         fullPage: true
     });
     });
@@ -123,7 +123,7 @@ test.describe('Clase 03 - Locators en DemoBlaze', () => {
     await expect(mensajeVacio).not.toBeVisible();
 
     await page.screenshot({
-        path: './evidencias/clase03-06-negacion-no-existe.png',
+        path: './evidencias/clase03/clase03-06-negacion-no-existe.png',
         fullPage: true
     });
     });
@@ -137,7 +137,7 @@ test.describe('Clase 03 - Locators en DemoBlaze', () => {
         await expect(botonPlaceOrder).toBeVisible();
 
         await page.screenshot({
-            path: './evidencias/clase03-07-reto1-place-order.png',
+            path: './evidencias/clase03/clase03-07-reto1-place-order.png',
             fullPage: true
         });
     });
@@ -154,7 +154,7 @@ test.describe('Clase 03 - Locators en DemoBlaze', () => {
         expect(precio).not.toBeNull();
 
         await page.screenshot({
-            path: './evidencias/clase03-08-reto2-filter-producto.png',
+            path: './evidencias/clase03/clase03-08-reto2-filter-producto.png',
             fullPage: true
         });
     });
@@ -171,7 +171,7 @@ test.describe('Clase 03 - Locators en DemoBlaze', () => {
         await expect(categorias.filter({ hasText: 'Monitors' })).toBeVisible();
 
         await page.screenshot({
-            path: './evidencias/clase03-09-reto3-categorias-atributo.png',
+            path: './evidencias/clase03/clase03-09-reto3-categorias-atributo.png',
             fullPage: true
         });
     });
