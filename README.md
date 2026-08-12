@@ -242,3 +242,104 @@ npx playwright test tests/clase04.spec.ts
 
 </details>
 
+## Evidencia de Ejecución - Tarea 5: Técnicas de diseño de pruebas + Assertions en Playwright (Clase 05)
+
+Tests en `tests/clase05.spec.ts` contra una nueva AUT, [saucedemo.com](https://www.saucedemo.com): 10 tests base organizados en 4 secciones (clases de equivalencia y valores en la frontera del login, verificación de inventario, soft assertions, tabla de decisión del checkout) + 3 tests reto, cada uno con una assertion no vista en el laboratorio base (`toHaveValue`, `toBeFocused`, `toHaveCSS`). Total: **13 tests**.
+
+Tabla de decisión completa del proceso de checkout (4 condiciones, 6 reglas, derivada de verificar en vivo el comportamiento real del sitio) en [casos-de-prueba/tabla-decision-checkout.md](casos-de-prueba/tabla-decision-checkout.md).
+
+```bash
+npx playwright test tests/clase05.spec.ts
+```
+
+<details>
+<summary> 1. CE válida: login con credenciales correctas</summary>
+
+![Login con credenciales correctas](evidencias/clase05/clase05-01-login-credenciales-correctas.png)
+
+</details>
+
+<details>
+<summary> 2. CE inválida: usuario no existe</summary>
+
+![Login con usuario inexistente](evidencias/clase05/clase05-02-login-usuario-no-existe.png)
+
+</details>
+
+<details>
+<summary> 3. CE inválida: usuario bloqueado</summary>
+
+![Login con usuario bloqueado](evidencias/clase05/clase05-03-login-usuario-bloqueado.png)
+
+</details>
+
+<details>
+<summary> 4. Valor en frontera: campos vacíos (frontera de longitud mínima)</summary>
+
+![Frontera de campos vacíos](evidencias/clase05/clase05-04-frontera-campos-vacios.png)
+
+</details>
+
+<details>
+<summary> 5. Verificar que el inventario tiene exactamente 6 productos</summary>
+
+![Inventario con 6 productos](evidencias/clase05/clase05-05-inventario-seis-productos.png)
+
+</details>
+
+<details>
+<summary> 6. Verificar precio del primer producto con regex</summary>
+
+![Precio validado con regex](evidencias/clase05/clase05-06-precio-regex.png)
+
+</details>
+
+<details>
+<summary> 7. Verificar atributos y estados de los elementos del inventario</summary>
+
+![Atributos y estados del inventario](evidencias/clase05/clase05-07-atributos-estados-inventario.png)
+
+</details>
+
+<details>
+<summary> 8. Verificar múltiples propiedades del primer producto con soft assertions</summary>
+
+![Soft assertions del primer producto](evidencias/clase05/clase05-08-soft-assertions-producto.png)
+
+</details>
+
+<details>
+<summary> 9. Tabla de decisión - Regla 1: logueado con items -> puede pagar</summary>
+
+![Tabla de decisión - Regla 1](evidencias/clase05/clase05-09-tabla-decision-regla1-checkout.png)
+
+</details>
+
+<details>
+<summary> 10. Tabla de decisión - Regla 2: logueado sin items -> carrito vacío</summary>
+
+![Tabla de decisión - Regla 2](evidencias/clase05/clase05-10-tabla-decision-regla2-carrito-vacio.png)
+
+</details>
+
+<details>
+<summary> 11. Reto 1 - toHaveValue(): ordenar catálogo por precio</summary>
+
+![Reto 1 - orden por precio](evidencias/clase05/clase05-11-reto1-orden-precio.png)
+
+</details>
+
+<details>
+<summary> 12. Reto 2 - toBeFocused(): campo de usuario enfocado</summary>
+
+![Reto 2 - campo enfocado](evidencias/clase05/clase05-12-reto2-campo-enfocado.png)
+
+</details>
+
+<details>
+<summary> 13. Reto 3 - toHaveCSS(): cursor pointer en "Add to cart"</summary>
+
+![Reto 3 - cursor pointer](evidencias/clase05/clase05-13-reto3-cursor-pointer.png)
+
+</details>
+
