@@ -343,3 +343,77 @@ npx playwright test tests/clase05.spec.ts
 
 </details>
 
+## Evidencia de Ejecución - Tarea 6: Testing Estratégico y Ágil + Page Object Model (Clase 06)
+
+Se reorganizó el proyecto aplicando el patrón **Page Object Model (POM)** sobre [saucedemo.com](https://www.saucedemo.com): se creó la carpeta `pages/` con un archivo `.ts` por página, y `tests/clase06.spec.ts` consume esos Page Objects en vez de locators sueltos.
+
+**Page Objects (`pages/`):**
+
+- `LoginPage.ts` — formulario de login, mensaje de error.
+- `InventoryPage.ts` — catálogo, badge del carrito, agregar/quitar productos por nombre, ordenar por precio.
+- `CartPage.ts` — ítems del carrito, botón de checkout.
+- `CheckoutPage.ts` *(Reto 1)* — formulario de datos (First Name, Last Name, Postal Code) y finalización de la compra.
+- `MenuPage.ts` *(Reto 2)* — menú hamburguesa y logout.
+
+Tests en `tests/clase06.spec.ts`: 5 tests base del laboratorio (login exitoso, login fallido, flujo completo de 2 productos en el carrito, conteo de 6 productos en el inventario, orden de precios de mayor a menor) + 3 tests reto (checkout de principio a fin con `CheckoutPage`, logout con `MenuPage`, `removeProductByName()` en `InventoryPage` verificando que el badge del carrito desaparece al llegar a 0). Total: **8 tests**.
+
+```bash
+npx playwright test tests/clase06.spec.ts
+```
+
+<details>
+<summary> 1. Login exitoso con POM</summary>
+
+![Login exitoso con POM](evidencias/clase06/clase06-01-login-exitoso-pom.png)
+
+</details>
+
+<details>
+<summary> 2. Login fallido con POM</summary>
+
+![Login fallido con POM](evidencias/clase06/clase06-02-login-fallido-pom.png)
+
+</details>
+
+<details>
+<summary> 3. Flujo completo: login → agregar 2 productos → verificar carrito</summary>
+
+![Flujo completo con 2 productos en carrito](evidencias/clase06/clase06-03-flujo-completo-carrito.png)
+
+</details>
+
+<details>
+<summary> 4. Verificar que el inventario tiene 6 productos</summary>
+
+![Inventario con 6 productos](evidencias/clase06/clase06-04-inventario-seis-productos.png)
+
+</details>
+
+<details>
+<summary> 5. Ordenar productos de mayor a menor precio</summary>
+
+![Orden de mayor a menor precio](evidencias/clase06/clase06-05-orden-mayor-menor-precio.png)
+
+</details>
+
+<details>
+<summary> 6. Reto 1 - CheckoutPage: compra completa de principio a fin</summary>
+
+![Reto 1 - checkout completo](evidencias/clase06/clase06-06-reto1-checkout-completo.png)
+
+</details>
+
+<details>
+<summary> 7. Reto 2 - MenuPage: logout desde el menú hamburguesa</summary>
+
+![Reto 2 - logout desde el menú](evidencias/clase06/clase06-07-reto2-logout-menu.png)
+
+</details>
+
+<details>
+<summary> 8. Reto 3 - removeProductByName(): el badge del carrito desaparece al llegar a 0</summary>
+
+![Reto 3 - remover producto y badge en 0](evidencias/clase06/clase06-08-reto3-remove-producto-badge.png)
+
+</details>
+
