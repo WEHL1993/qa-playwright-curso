@@ -417,3 +417,71 @@ npx playwright test tests/clase06.spec.ts
 
 </details>
 
+## Evidencia de Ejecución - Tarea 7: Evidencias de Pruebas y Reportes (Clase 07)
+
+Tests en `tests/clase07.spec.ts`: 4 tests de clase enfocados en técnicas de captura de evidencia sobre [saucedemo.com](https://www.saucedemo.com) (login exitoso documentado antes/después, flujo de compra completo, captura del momento exacto de un defecto esperado con `locator.screenshot()`, comparación de estados antes/después de una acción) + `tests/tarea07.spec.ts` con 3 tests reto (`test.step()` para documentar el flujo de login por pasos, `testInfo.attach()` para adjuntar datos capturados al reporte HTML, `toHaveScreenshot()` para comparación visual contra un baseline). Total: **7 tests**.
+
+```bash
+npx playwright test tests/clase07.spec.ts tests/tarea07.spec.ts
+```
+
+<details>
+<summary> 1. Login exitoso: evidencia completa antes y después</summary>
+
+![Antes del login](evidencias/clase07/clase07-01-antes-login.png)
+![Después del login](evidencias/clase07/clase07-02-despues-login.png)
+
+</details>
+
+<details>
+<summary> 2. Documentar el flujo de compra completo</summary>
+
+![Inventario](evidencias/clase07/clase07-03-inventario.png)
+![Producto agregado](evidencias/clase07/clase07-04-producto-agregado.png)
+![Carrito con el producto](evidencias/clase07/clase07-05-carrito.png)
+
+</details>
+
+<details>
+<summary> 3. Captura del momento exacto de un defecto esperado (usuario bloqueado)</summary>
+
+![Error de usuario bloqueado](evidencias/clase07/clase07-06-error-usuario-bloqueado.png)
+
+</details>
+
+<details>
+<summary> 4. Comparar estados antes y después de una acción</summary>
+
+![Estado antes](evidencias/clase07/clase07-07-estado-antes.png)
+![Estado después](evidencias/clase07/clase07-08-estado-despues.png)
+
+</details>
+
+<details>
+<summary> 5. Reto 1 - test.step(): Estructura un test en pasos nombrados(navegar, login, verificar)</summary>
+
+![Reto 1 - test.step()](evidencias/clase07/tarea07-reto1-test-step.png)
+
+</details>
+
+<details>
+<summary> 6. Reto 2 - testInfo.attach(): Adjunta un archivo de texto con datos capturados (cantidad de productos, URL, fecha) directamente al reporte HTML</summary>
+
+![Reto 2 - testInfo.attach()](evidencias/clase07/tarea07-reto2-testinfo-attach.png)
+
+</details>
+
+<details>
+<summary> 7. Reto 3 - toHaveScreenshot(): Comparación visual contra una imagen de referencia(baseline); la primera corrida genera el baseline, comitéalo al repo.</summary>
+
+![Reto 3 - toHaveScreenshot()](evidencias/clase07/tarea07-reto3-tohavescreenshot.png)
+
+</details>
+
+<details>
+<summary> 8. Reporte de ejecución (DR-001): resultados de clase07.spec.ts y tarea07.spec.ts</summary>
+
+Reporte completo con el detalle test por test y el resumen de ejecución en [reportes/DR-001.md](reportes/DR-001.md).
+
+</details>
+
