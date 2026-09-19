@@ -485,3 +485,83 @@ Reporte completo con el detalle test por test y el resumen de ejecución en [rep
 
 </details>
 
+## Evidencia de Ejecución - Tarea 8: Hooks, Configuración de Test y Organización de Suites (Clase 08)
+
+Se agregó el helper `helpers/auth.ts` (`loginAs(page, username)`) para centralizar el login contra [saucedemo.com](https://www.saucedemo.com) según el usuario recibido, reutilizado en `tests/clase08.spec.ts` y `tests/tarea08.spec.ts`.
+
+Tests en `tests/clase08.spec.ts`: 2 suites con `test.describe.configure({ mode: 'parallel' })`. La primera usa `test.beforeEach` (login con `standard_user`) y `test.afterEach` (screenshot automático solo si el test falla) y agrupa 4 tests (conteo de 6 productos en el inventario, formato de precio en todos los productos, apertura/cierre del menú hamburguesa, logout). La segunda suite prueba el comportamiento por tipo de usuario (checkout completo con `standard_user`, login con `performance_glitch_user` midiendo el tiempo de espera). Total: **6 tests**.
+
+`tests/tarea08.spec.ts` con 3 tests reto: Reto 1, suite en `mode: 'serial'` con una única `page` creada en `test.beforeAll` (`browser.newPage()`) y cerrada en `test.afterAll`, compartida entre 3 pasos secuenciales (login → agregar producto → verificar carrito conserva el producto); Reto 2, `test.slow()` para triplicar el timeout del test que usa `performance_glitch_user`; Reto 3, `test.skip()` dinámico que omite la verificación del inventario cuando `locked_out_user` muestra el mensaje de error de login. Total: **5 tests**.
+
+Plan mínimo de aseguramiento de calidad (propósito, alcance, herramientas y criterios de salida) para las funciones críticas de Sauce Demo, documentado en [documentos/sqa-plan-saucedemo.md](documentos/sqa-plan-saucedemo.md).
+
+```bash
+npx playwright test tests/clase08.spec.ts tests/tarea08.spec.ts
+```
+
+<details>
+<summary> 1. El inventario muestra 6 productos</summary>
+
+![Inventario con 6 productos](evidencias/clase08/clase08-01-inventario-6-productos.png)
+
+</details>
+
+<details>
+<summary> 2. Todos los productos tienen precio visible en formato correcto</summary>
+
+![Precios visibles](evidencias/clase08/clase08-02-precios-visibles.png)
+
+</details>
+
+<details>
+<summary> 3. El menú de hamburguesa abre y cierra correctamente</summary>
+
+![Menú abierto](evidencias/clase08/clase08-03-menu-abierto.png)
+![Menú cerrado](evidencias/clase08/clase08-04-menu-cerrado.png)
+
+</details>
+
+<details>
+<summary> 4. Logout funciona correctamente</summary>
+
+![Logout](evidencias/clase08/clase08-05-logout.png)
+
+</details>
+
+<details>
+<summary> 5. Usuario estándar puede completar el checkout</summary>
+
+![Checkout](evidencias/clase08/clase08-06-checkout.png)
+
+</details>
+
+<details>
+<summary> 6. Usuario de rendimiento degradado experimenta lentitud en el login</summary>
+
+![Performance glitch user](evidencias/clase08/clase08-07-performance-glitch.png)
+
+</details>
+
+<details>
+<summary> 7. Reto 1 - Suite serial con página compartida</summary>
+
+![Paso 1 - Login](evidencias/clase08/tarea08-reto1-paso1-login.png)
+![Paso 2 - Producto agregado](evidencias/clase08/tarea08-reto1-paso2-producto-agregado.png)
+![Paso 3 - Carrito verificado](evidencias/clase08/tarea08-reto1-paso3-carrito-verificado.png)
+
+</details>
+
+<details>
+<summary> 8. Reto 2 - test.slow()</summary>
+
+![Reto 2 - test.slow()](evidencias/clase08/tarea08-reto2-test-slow.png)
+
+</details>
+
+<details>
+<summary> 9. Reto 3 - test.skip() dinámico</summary>
+
+![Reto 3 - usuario bloqueado](evidencias/clase08/tarea08-reto3-usuario-bloqueado.png)
+
+</details>
+
