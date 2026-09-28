@@ -565,3 +565,85 @@ npx playwright test tests/clase08.spec.ts tests/tarea08.spec.ts
 
 </details>
 
+## Evidencia de Ejecución - Tarea 9: Fixtures y Datos de Prueba (Clase 09)
+
+Se creó la carpeta `fixtures/` (`fixtures/index.ts`) que extiende `test` de Playwright con 3 fixtures personalizados sobre [saucedemo.com](https://www.saucedemo.com): `loginPage` (instancia de `LoginPage` ya navegada), `inventoryPage` (login como `standard_user` ya realizado) y `cartPage` (login + 1 producto ya agregado al carrito).
+
+Tests en `tests/clase09.spec.ts`: tests parametrizados de login (3 casos: usuario estándar, usuario bloqueado, campos vacíos), tests parametrizados de agregar productos al carrito (3 productos distintos) y 3 tests usando los fixtures personalizados (`inventoryPage`, `cartPage`, `loginPage`). Total: **9 tests**.
+
+`tests/tarea09.spec.ts` con 3 retos: Reto 1, fixture con teardown real (`cronometro`) que mide la duración del test dentro de un `finally`, demostrado con un test que pasa y otro que falla a propósito; Reto 2, fixture de alcance `worker` (`contadorWorker`) que se instancia una sola vez por worker y mantiene su estado entre 2 tests corridos en `mode: 'serial'`; Reto 3, `test.use()` combinado con parametrización de 2 viewports (móvil y escritorio) para correr el mismo test de login en ambos tamaños de pantalla. Total: **6 tests**.
+
+```bash
+npx playwright test tests/clase09.spec.ts tests/tarea09.spec.ts
+```
+
+<details>
+<summary> 1. Tests parametrizados de login (3 casos: estándar, bloqueado, campos vacíos)</summary>
+
+![Login usuario estándar](evidencias/clase09/clase09-01-login-usuario-estándar-puede-ingresar.png)
+![Login usuario bloqueado](evidencias/clase09/clase09-02-login-usuario-bloqueado-no-puede-ingresar.png)
+![Login campos vacíos](evidencias/clase09/clase09-03-login-campos-vacíos-muestran-error.png)
+
+</details>
+
+<details>
+<summary> 2. Tests parametrizados de agregar productos al carrito (3 productos)</summary>
+
+![Carrito Sauce Labs Backpack](evidencias/clase09/clase09-04-carrito-sauce-labs-backpack.png)
+![Carrito Sauce Labs Bike Light](evidencias/clase09/clase09-05-carrito-sauce-labs-bike-light.png)
+![Carrito Sauce Labs Bolt T-Shirt](evidencias/clase09/clase09-06-carrito-sauce-labs-bolt-t-shirt.png)
+
+</details>
+
+<details>
+<summary> 3. Fixture inventoryPage: verificar inventario ya logueado</summary>
+
+![Fixture inventario](evidencias/clase09/clase09-07-fixture-inventario.png)
+
+</details>
+
+<details>
+<summary> 4. Fixture cartPage: verificar que hay 1 item ya agregado</summary>
+
+![Fixture carrito](evidencias/clase09/clase09-08-fixture-carrito.png)
+
+</details>
+
+<details>
+<summary> 5. Fixture loginPage: login manual dentro del test</summary>
+
+![Fixture loginPage](evidencias/clase09/clase09-09-fixture-loginpage.png)
+
+</details>
+
+<details>
+<summary> 6. Reto 1 - Fixture con teardown real (cronómetro en finally)</summary>
+
+![Reto 1 - test que pasa](evidencias/clase09/tarea09-reto1-paso1-test-pasa.png)
+![Reto 1 - test que falla a propósito](evidencias/clase09/tarea09-reto1-paso2-test-falla-a-proposito.png)
+
+</details>
+
+<details>
+<summary> 7. Reto 2 - Fixture de alcance worker (contador persiste entre 2 tests)</summary>
+
+![Reto 2 - contador en 1](evidencias/clase09/tarea09-reto2-paso1-contador-en-1.png)
+![Reto 2 - contador en 2](evidencias/clase09/tarea09-reto2-paso2-contador-en-2.png)
+
+</details>
+
+<details>
+<summary> 8. Reto 3 - test.use() + parametrización de viewports (móvil y escritorio)</summary>
+
+![Reto 3 - viewport móvil](evidencias/clase09/tarea09-reto3-móvil.png)
+![Reto 3 - viewport escritorio](evidencias/clase09/tarea09-reto3-escritorio.png)
+
+</details>
+
+<details>
+<summary> 9. Reporte HTML de ejecución: 15 tests (14 passed, 1 flaky)</summary>
+
+![Reporte HTML clase09 y tarea09](evidencias/clase09/clase09-reporte-html.png)
+
+</details>
+
