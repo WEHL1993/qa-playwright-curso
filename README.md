@@ -647,3 +647,214 @@ npx playwright test tests/clase09.spec.ts tests/tarea09.spec.ts
 
 </details>
 
+## Evidencia de Ejecución - Tarea 10: Multi-browser y Tags (Clase 10)
+
+`playwright.config.ts` ahora define **5 projects**: `chromium`, `firefox`, `webkit`, `mobile-chrome` y `mobile-safari`, con `workers: 1` y `baseURL` de DemoBlaze. Cada test se ejecuta una vez por project. Los navegadores de Firefox y WebKit se instalan con `npx playwright install firefox webkit`.
+
+Tests sobre [saucedemo.com](https://www.saucedemo.com):
+
+- `tests/clase10-smoke.spec.ts`: 5 tests con tag `@smoke` (login carga, login estándar, inventario, carrito, checkout).
+- `tests/clase10-regression.spec.ts`: 5 tests con tag `@regression` (ordenamiento A-Z / Z-A, precio de menor a mayor, botón Remove, detalle de producto).
+- `tests/tarea10.spec.ts` con 3 retos: Reto 1, tags múltiples (`{ tag: ['@regression', '@ui'] }`) y exclusión con `--grep-invert`; Reto 2, `expect.soft()` verificando varios atributos de un producto y `testInfo.errors` para reportar todos los fallos juntos (un test con `test.fail()` acumula 3 errores a propósito); Reto 3, fixture `browserName` para ajustar la aserción del User-Agent según el motor en vez de usar `test.skip()`.
+
+Total: 16 tests × 5 projects = **80 ejecuciones, 80 passed**. Cada imagen lleva el nombre del project como sufijo (`-chromium`, `-firefox`, `-webkit`, `-mobile-chrome`, `-mobile-safari`).
+
+```bash
+# Laboratorio + tarea completos (todos los projects)
+npx playwright test tests/clase10-smoke.spec.ts tests/clase10-regression.spec.ts tests/tarea10.spec.ts
+
+# Por tag
+npx playwright test --grep "@smoke"
+npx playwright test --grep "@regression"
+npx playwright test tests/tarea10.spec.ts --grep "@regression" --grep-invert "@ui"
+
+# Por project
+npx playwright test --project=firefox
+npx playwright test --project=mobile-chrome --grep "@smoke"
+
+# Reporte HTML
+npx playwright show-report
+```
+
+<details>
+<summary> 1. La página de login carga</summary>
+
+![La página de login carga - chromium](evidencias/clase10/clase10-01-smoke-login-carga-chromium.png)
+![La página de login carga - firefox](evidencias/clase10/clase10-01-smoke-login-carga-firefox.png)
+![La página de login carga - webkit](evidencias/clase10/clase10-01-smoke-login-carga-webkit.png)
+![La página de login carga - mobile-chrome](evidencias/clase10/clase10-01-smoke-login-carga-mobile-chrome.png)
+![La página de login carga - mobile-safari](evidencias/clase10/clase10-01-smoke-login-carga-mobile-safari.png)
+
+</details>
+
+<details>
+<summary> 2. Login con usuario estándar funciona</summary>
+
+![Login con usuario estándar funciona - chromium](evidencias/clase10/clase10-02-smoke-login-estandar-chromium.png)
+![Login con usuario estándar funciona - firefox](evidencias/clase10/clase10-02-smoke-login-estandar-firefox.png)
+![Login con usuario estándar funciona - webkit](evidencias/clase10/clase10-02-smoke-login-estandar-webkit.png)
+![Login con usuario estándar funciona - mobile-chrome](evidencias/clase10/clase10-02-smoke-login-estandar-mobile-chrome.png)
+![Login con usuario estándar funciona - mobile-safari](evidencias/clase10/clase10-02-smoke-login-estandar-mobile-safari.png)
+
+</details>
+
+<details>
+<summary> 3. El inventario muestra productos</summary>
+
+![El inventario muestra productos - chromium](evidencias/clase10/clase10-03-smoke-inventario-productos-chromium.png)
+![El inventario muestra productos - firefox](evidencias/clase10/clase10-03-smoke-inventario-productos-firefox.png)
+![El inventario muestra productos - webkit](evidencias/clase10/clase10-03-smoke-inventario-productos-webkit.png)
+![El inventario muestra productos - mobile-chrome](evidencias/clase10/clase10-03-smoke-inventario-productos-mobile-chrome.png)
+![El inventario muestra productos - mobile-safari](evidencias/clase10/clase10-03-smoke-inventario-productos-mobile-safari.png)
+
+</details>
+
+<details>
+<summary> 4. El carrito es accesible</summary>
+
+![El carrito es accesible - chromium](evidencias/clase10/clase10-04-smoke-carrito-accesible-chromium.png)
+![El carrito es accesible - firefox](evidencias/clase10/clase10-04-smoke-carrito-accesible-firefox.png)
+![El carrito es accesible - webkit](evidencias/clase10/clase10-04-smoke-carrito-accesible-webkit.png)
+![El carrito es accesible - mobile-chrome](evidencias/clase10/clase10-04-smoke-carrito-accesible-mobile-chrome.png)
+![El carrito es accesible - mobile-safari](evidencias/clase10/clase10-04-smoke-carrito-accesible-mobile-safari.png)
+
+</details>
+
+<details>
+<summary> 5. El checkout inicia correctamente</summary>
+
+![El checkout inicia correctamente - chromium](evidencias/clase10/clase10-05-smoke-checkout-inicia-chromium.png)
+![El checkout inicia correctamente - firefox](evidencias/clase10/clase10-05-smoke-checkout-inicia-firefox.png)
+![El checkout inicia correctamente - webkit](evidencias/clase10/clase10-05-smoke-checkout-inicia-webkit.png)
+![El checkout inicia correctamente - mobile-chrome](evidencias/clase10/clase10-05-smoke-checkout-inicia-mobile-chrome.png)
+![El checkout inicia correctamente - mobile-safari](evidencias/clase10/clase10-05-smoke-checkout-inicia-mobile-safari.png)
+
+</details>
+
+<details>
+<summary> 6. Ordenamiento A-Z funciona</summary>
+
+![Ordenamiento A-Z funciona - chromium](evidencias/clase10/clase10-06-regression-orden-az-chromium.png)
+![Ordenamiento A-Z funciona - firefox](evidencias/clase10/clase10-06-regression-orden-az-firefox.png)
+![Ordenamiento A-Z funciona - webkit](evidencias/clase10/clase10-06-regression-orden-az-webkit.png)
+![Ordenamiento A-Z funciona - mobile-chrome](evidencias/clase10/clase10-06-regression-orden-az-mobile-chrome.png)
+![Ordenamiento A-Z funciona - mobile-safari](evidencias/clase10/clase10-06-regression-orden-az-mobile-safari.png)
+
+</details>
+
+<details>
+<summary> 7. Ordenamiento Z-A funciona</summary>
+
+![Ordenamiento Z-A funciona - chromium](evidencias/clase10/clase10-07-regression-orden-za-chromium.png)
+![Ordenamiento Z-A funciona - firefox](evidencias/clase10/clase10-07-regression-orden-za-firefox.png)
+![Ordenamiento Z-A funciona - webkit](evidencias/clase10/clase10-07-regression-orden-za-webkit.png)
+![Ordenamiento Z-A funciona - mobile-chrome](evidencias/clase10/clase10-07-regression-orden-za-mobile-chrome.png)
+![Ordenamiento Z-A funciona - mobile-safari](evidencias/clase10/clase10-07-regression-orden-za-mobile-safari.png)
+
+</details>
+
+<details>
+<summary> 8. Precio de menor a mayor funciona</summary>
+
+![Precio de menor a mayor funciona - chromium](evidencias/clase10/clase10-08-regression-precio-menor-mayor-chromium.png)
+![Precio de menor a mayor funciona - firefox](evidencias/clase10/clase10-08-regression-precio-menor-mayor-firefox.png)
+![Precio de menor a mayor funciona - webkit](evidencias/clase10/clase10-08-regression-precio-menor-mayor-webkit.png)
+![Precio de menor a mayor funciona - mobile-chrome](evidencias/clase10/clase10-08-regression-precio-menor-mayor-mobile-chrome.png)
+![Precio de menor a mayor funciona - mobile-safari](evidencias/clase10/clase10-08-regression-precio-menor-mayor-mobile-safari.png)
+
+</details>
+
+<details>
+<summary> 9. El botón "Remove" aparece después de agregar al carrito</summary>
+
+![El botón "Remove" aparece después de agregar al carrito - chromium](evidencias/clase10/clase10-09-regression-boton-remove-chromium.png)
+![El botón "Remove" aparece después de agregar al carrito - firefox](evidencias/clase10/clase10-09-regression-boton-remove-firefox.png)
+![El botón "Remove" aparece después de agregar al carrito - webkit](evidencias/clase10/clase10-09-regression-boton-remove-webkit.png)
+![El botón "Remove" aparece después de agregar al carrito - mobile-chrome](evidencias/clase10/clase10-09-regression-boton-remove-mobile-chrome.png)
+![El botón "Remove" aparece después de agregar al carrito - mobile-safari](evidencias/clase10/clase10-09-regression-boton-remove-mobile-safari.png)
+
+</details>
+
+<details>
+<summary> 10. Navegar al detalle del producto y regresar</summary>
+
+![Navegar al detalle del producto y regresar - chromium](evidencias/clase10/clase10-10-regression-detalle-producto-chromium.png)
+![Navegar al detalle del producto y regresar - firefox](evidencias/clase10/clase10-10-regression-detalle-producto-firefox.png)
+![Navegar al detalle del producto y regresar - webkit](evidencias/clase10/clase10-10-regression-detalle-producto-webkit.png)
+![Navegar al detalle del producto y regresar - mobile-chrome](evidencias/clase10/clase10-10-regression-detalle-producto-mobile-chrome.png)
+![Navegar al detalle del producto y regresar - mobile-safari](evidencias/clase10/clase10-10-regression-detalle-producto-mobile-safari.png)
+
+</details>
+
+<details>
+<summary> 11. Reto 1 - Tags múltiples `@regression @ui`</summary>
+
+![Reto 1 - Tags múltiples `@regression @ui` - chromium](evidencias/clase10/tarea10-reto1-regression-ui-chromium.png)
+![Reto 1 - Tags múltiples `@regression @ui` - firefox](evidencias/clase10/tarea10-reto1-regression-ui-firefox.png)
+![Reto 1 - Tags múltiples `@regression @ui` - webkit](evidencias/clase10/tarea10-reto1-regression-ui-webkit.png)
+![Reto 1 - Tags múltiples `@regression @ui` - mobile-chrome](evidencias/clase10/tarea10-reto1-regression-ui-mobile-chrome.png)
+![Reto 1 - Tags múltiples `@regression @ui` - mobile-safari](evidencias/clase10/tarea10-reto1-regression-ui-mobile-safari.png)
+
+</details>
+
+<details>
+<summary> 12. Reto 1 - Tags múltiples `@regression @funcional`</summary>
+
+![Reto 1 - Tags múltiples `@regression @funcional` - chromium](evidencias/clase10/tarea10-reto1-regression-funcional-chromium.png)
+![Reto 1 - Tags múltiples `@regression @funcional` - firefox](evidencias/clase10/tarea10-reto1-regression-funcional-firefox.png)
+![Reto 1 - Tags múltiples `@regression @funcional` - webkit](evidencias/clase10/tarea10-reto1-regression-funcional-webkit.png)
+![Reto 1 - Tags múltiples `@regression @funcional` - mobile-chrome](evidencias/clase10/tarea10-reto1-regression-funcional-mobile-chrome.png)
+![Reto 1 - Tags múltiples `@regression @funcional` - mobile-safari](evidencias/clase10/tarea10-reto1-regression-funcional-mobile-safari.png)
+
+</details>
+
+<details>
+<summary> 13. Reto 1 - Tags múltiples `@smoke @funcional`</summary>
+
+![Reto 1 - Tags múltiples `@smoke @funcional` - chromium](evidencias/clase10/tarea10-reto1-smoke-funcional-sin-badge-chromium.png)
+![Reto 1 - Tags múltiples `@smoke @funcional` - firefox](evidencias/clase10/tarea10-reto1-smoke-funcional-sin-badge-firefox.png)
+![Reto 1 - Tags múltiples `@smoke @funcional` - webkit](evidencias/clase10/tarea10-reto1-smoke-funcional-sin-badge-webkit.png)
+![Reto 1 - Tags múltiples `@smoke @funcional` - mobile-chrome](evidencias/clase10/tarea10-reto1-smoke-funcional-sin-badge-mobile-chrome.png)
+![Reto 1 - Tags múltiples `@smoke @funcional` - mobile-safari](evidencias/clase10/tarea10-reto1-smoke-funcional-sin-badge-mobile-safari.png)
+
+</details>
+
+<details>
+<summary> 14. Reto 2 - expect.soft() con atributos correctos (0 errores)</summary>
+
+![Reto 2 - expect.soft() con atributos correctos (0 errores) - chromium](evidencias/clase10/tarea10-reto2-soft-sin-errores-chromium.png)
+![Reto 2 - expect.soft() con atributos correctos (0 errores) - firefox](evidencias/clase10/tarea10-reto2-soft-sin-errores-firefox.png)
+![Reto 2 - expect.soft() con atributos correctos (0 errores) - webkit](evidencias/clase10/tarea10-reto2-soft-sin-errores-webkit.png)
+![Reto 2 - expect.soft() con atributos correctos (0 errores) - mobile-chrome](evidencias/clase10/tarea10-reto2-soft-sin-errores-mobile-chrome.png)
+![Reto 2 - expect.soft() con atributos correctos (0 errores) - mobile-safari](evidencias/clase10/tarea10-reto2-soft-sin-errores-mobile-safari.png)
+
+</details>
+
+<details>
+<summary> 15. Reto 2 - expect.soft() con 3 errores acumulados a propósito</summary>
+
+![Reto 2 - expect.soft() con 3 errores acumulados a propósito - chromium](evidencias/clase10/tarea10-reto2-soft-3-errores-chromium.png)
+![Reto 2 - expect.soft() con 3 errores acumulados a propósito - firefox](evidencias/clase10/tarea10-reto2-soft-3-errores-firefox.png)
+![Reto 2 - expect.soft() con 3 errores acumulados a propósito - webkit](evidencias/clase10/tarea10-reto2-soft-3-errores-webkit.png)
+![Reto 2 - expect.soft() con 3 errores acumulados a propósito - mobile-chrome](evidencias/clase10/tarea10-reto2-soft-3-errores-mobile-chrome.png)
+![Reto 2 - expect.soft() con 3 errores acumulados a propósito - mobile-safari](evidencias/clase10/tarea10-reto2-soft-3-errores-mobile-safari.png)
+
+</details>
+
+<details>
+<summary> 16. Reto 3 - Fixture browserName (User-Agent según el motor)</summary>
+
+![Reto 3 - Fixture browserName (User-Agent según el motor) - chromium](evidencias/clase10/tarea10-reto3-user-agent-chromium.png)
+![Reto 3 - Fixture browserName (User-Agent según el motor) - firefox](evidencias/clase10/tarea10-reto3-user-agent-firefox.png)
+![Reto 3 - Fixture browserName (User-Agent según el motor) - webkit](evidencias/clase10/tarea10-reto3-user-agent-webkit.png)
+![Reto 3 - Fixture browserName (User-Agent según el motor) - mobile-chrome](evidencias/clase10/tarea10-reto3-user-agent-mobile-chrome.png)
+![Reto 3 - Fixture browserName (User-Agent según el motor) - mobile-safari](evidencias/clase10/tarea10-reto3-user-agent-mobile-safari.png)
+
+</details>
+
+<details>
+<summary> 17. Reporte HTML multi-browser: 80 tests passed en 5 projects</summary>
+
+![Reporte HTML clase10 y tarea10](evidencias/clase10/clase10-reporte-html.png)
+
+</details>
