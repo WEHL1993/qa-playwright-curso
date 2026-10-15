@@ -870,91 +870,91 @@ npx playwright show-report
 ```
 
 <details>
-<summary> 18. Laboratorio 11 - Página principal carga correctamente</summary>
+<summary> 1. Laboratorio 11 - Página principal carga correctamente</summary>
 
 ![Página principal](evidencias/clase11/clase11-01-pagina-principal-chromium.png)
 
 </details>
 
 <details>
-<summary> 19. Laboratorio 11 - Login exitoso</summary>
+<summary> 2. Laboratorio 11 - Login exitoso</summary>
 
 ![Login exitoso](evidencias/clase11/clase11-02-login-exitoso-chromium.png)
 
 </details>
 
 <details>
-<summary> 20. Laboratorio 11 - Login fallido</summary>
+<summary> 3. Laboratorio 11 - Login fallido</summary>
 
 ![Login fallido](evidencias/clase11/clase11-03-login-fallido-chromium.png)
 
 </details>
 
 <details>
-<summary> 21. Laboratorio 11 - Elementos dinámicos (checkbox desaparece y vuelve)</summary>
+<summary> 4. Laboratorio 11 - Elementos dinámicos (checkbox desaparece y vuelve)</summary>
 
 ![Elementos dinámicos](evidencias/clase11/clase11-04-elementos-dinamicos-chromium.png)
 
 </details>
 
 <details>
-<summary> 22. Laboratorio 11 - Manejo de alertas del navegador</summary>
+<summary> 5. Laboratorio 11 - Manejo de alertas del navegador</summary>
 
 ![Alerta](evidencias/clase11/clase11-05-alerta-navegador-chromium.png)
 
 </details>
 
 <details>
-<summary> 23. Laboratorio 11 - Manejo de confirm dialog</summary>
+<summary> 6. Laboratorio 11 - Manejo de confirm dialog</summary>
 
 ![Confirm dialog](evidencias/clase11/clase11-06-confirm-dialog-chromium.png)
 
 </details>
 
 <details>
-<summary> 24. Laboratorio 11 - Tabla ordenada por Last Name</summary>
+<summary> 7. Laboratorio 11 - Tabla ordenada por Last Name</summary>
 
 ![Tabla de datos](evidencias/clase11/clase11-07-tabla-datos-chromium.png)
 
 </details>
 
 <details>
-<summary> 25. Laboratorio 11 - Adjuntar evidencia al reporte HTML</summary>
+<summary> 8. Laboratorio 11 - Adjuntar evidencia al reporte HTML</summary>
 
 ![Adjuntar evidencia](evidencias/clase11/clase11-08-adjuntar-evidencia-chromium.png)
 
 </details>
 
 <details>
-<summary> 26. Laboratorio 11 - Imágenes rotas (BUG-001, falla esperada con `test.fail()`)</summary>
+<summary> 9. Laboratorio 11 - Imágenes rotas (BUG-001, falla esperada con `test.fail()`)</summary>
 
 ![Imágenes rotas](evidencias/clase11/clase11-09-imagenes-rotas-chromium.png)
 
 </details>
 
 <details>
-<summary> 27. Tarea 11 Reto 1 - Frecuencia del defecto intermitente en /typos</summary>
+<summary> 10. Tarea 11 Reto 1 - Frecuencia del defecto intermitente en /typos</summary>
 
 ![Reto 1](evidencias/clase11/tarea11-reto1-frecuencia-typos-chromium.png)
 
 </details>
 
 <details>
-<summary> 28. Tarea 11 Reto 2 - `test.fixme` enlazado al issue #1 (omitido, sin captura; ver reporte HTML)</summary>
+<summary> 11. Tarea 11 Reto 2 - `test.fixme` enlazado al issue #1 (omitido, sin captura; ver reporte HTML)</summary>
 
 Se omite con `test.fixme()` mientras el defecto siga abierto.
 
 </details>
 
 <details>
-<summary> 29. Tarea 11 Reto 3 - Borrador de bug report solo si el test tiene errores</summary>
+<summary> 12. Tarea 11 Reto 3 - Borrador de bug report solo si el test tiene errores</summary>
 
 ![Reto 3](evidencias/clase11/tarea11-reto3-borrador-bug-report-chromium.png)
 
 </details>
 
 <details>
-<summary> 30. Reporte HTML: 11 passed y 1 skipped en chromium</summary>
+<summary> 13. Reporte HTML: 11 passed y 1 skipped en chromium</summary>
 
 ![Reporte HTML clase11 y tarea11](evidencias/clase11/clase11-reporte-html.png)
 
